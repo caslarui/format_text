@@ -31,6 +31,7 @@ int max_line( char **str, int line_count);
 text 	wrap_text(char *string, int max_line_length);
 text 	parser(text input, char *str);
 void 	wrap( char *out, char *str, int columns );
+char 	*delete_space(char *str);
 char 	**a_sort(char **str, int nb_lines);
 char    **justify(text input, int s_line, int e_line);
 char 	**z_sort(char **str, int nb_lines);

@@ -1,4 +1,5 @@
-#include "format_text.h"
+// Copyright [2018] <Ligia Dolinta 311CD>
+#include "./format_text.h"
 
 char *justify_line(char *str, int width) {
     char *rez = NULL;
@@ -10,15 +11,15 @@ char *justify_line(char *str, int width) {
     int i = 0;
     char **words;
 
-    if(strlen(str) == 1 || (int)strlen(str) == width)
+    if (strlen(str) == 1 || (int)strlen(str) == width)
         return(str);
 
 
     str = trim(str);
     rez = (char *)malloc(sizeof(char) * width + 1);
     words = ft_split(str);
-    while(str[i++])
-        if(str[i] == ' ')
+    while (str[i++])
+        if (str[i] == ' ')
             present_space++;
 
     spaces = width -  (int)strlen(str);
@@ -27,14 +28,15 @@ char *justify_line(char *str, int width) {
     sp = (char *)malloc(sizeof(char) * equal_space);
     for (i = 0; i < equal_space; i++)
         strcat(sp, " ");
- 
-    int j = 0; 
-    while(words[j++]);
+
+    int j = 0;
+    while (words[j++])
+        continue;
     j--;
 
     i = 0;
     extra_space = spaces % present_space;
-        while(i < j) {
+        while (i < j) {
         strcat(rez, words[i]);
         if (i == j - 1)
             break;
@@ -45,9 +47,7 @@ char *justify_line(char *str, int width) {
         }
         i++;
     }
-    // printf("[%c]\n", rez[width - 2]);
     rez[width - 1] = '\n';
-    // printf("%s\n",rez);
     return(rez);
     free(rez);
 }
@@ -66,20 +66,14 @@ char   **justify(text input, int s_line, int e_line) {
             flag = 1;
         if (i > e_line)
             flag = 0;
-        if (flag)
-            if(strlen(input.text[i + 1]) > 1)
-                strcpy(ret[i],justify_line(input.text[i], max));
+        if (flag) {
+            if (strlen(input.text[i + 1]) > 1)
+                strcpy(ret[i], justify_line(trim(input.text[i]), max));
             else
-                strcpy(ret[i], input.text[i]);    
-        else
+                strcpy(ret[i], trim(input.text[i]));
+        } else {
             strcpy(ret[i], input.text[i]);
-    // printf("[%d] --- [%s]",i,ret[i]);
+            }
     }
     return(ret);
 }
-// int main() {
-//     char str[100]= {"elit. Vestibulum posuere, ipsum et eleifend"};
-//     printf("%s\n",justify_line(str,50));
-
-//     return(0);
-// }
